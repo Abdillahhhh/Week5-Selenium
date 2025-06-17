@@ -1,0 +1,95 @@
+
+@PriorityTinggi
+Scenario Outline: Login dengan kredensial yang valid                       [90m# src/test/resources/features/Authentication.feature:12[0m
+  [32mGiven [0m[32mBuka halaman login untuk pengujian login valid[0m                     [90m# com.juaracoding.apitest.steps.AuthenticationSignInTestStep.testStep01()[0m
+  [32mWhen [0m[32mMasukkan username [0m[32m[1m"standard_user"[0m[32m dan password [0m[32m[1m"secret_sauce"[0m[32m valid[0m [90m# com.juaracoding.apitest.steps.AuthenticationSignInTestStep.testStep02(java.lang.String,java.lang.String)[0m
+  [32mAnd [0m[32mKlik tombol login untuk login valid[0m                                  [90m# com.juaracoding.apitest.steps.AuthenticationSignInTestStep.testStep03()[0m
+  [32mThen [0m[32mPengguna berhasil masuk ke halaman produk[0m                           [90m# com.juaracoding.apitest.steps.AuthenticationSignInTestStep.testStep04()[0m
+
+Scenario Outline: Login dengan kredensial yang tidak valid                          [90m# src/test/resources/features/Authentication.feature:22[0m
+  [32mGiven [0m[32mBuka halaman login untuk pengujian login invalid[0m                            [90m# com.juaracoding.apitest.steps.AuthenticationInvalidSignInTestStep.testStep01()[0m
+  [32mWhen [0m[32mMasukkan username [0m[32m[1m"username_salah"[0m[32m dan password [0m[32m[1m"password_salah"[0m[32m tidak valid[0m [90m# com.juaracoding.apitest.steps.AuthenticationInvalidSignInTestStep.testStep02(java.lang.String,java.lang.String)[0m
+  [32mAnd [0m[32mKlik tombol login untuk login tidak valid[0m                                     [90m# com.juaracoding.apitest.steps.AuthenticationInvalidSignInTestStep.testStep03()[0m
+  [32mThen [0m[32mPengguna akan melihat pesan error[0m                                            [90m# com.juaracoding.apitest.steps.AuthenticationInvalidSignInTestStep.testStep04()[0m
+
+Scenario: Verifikasi daftar produk ditampilkan setelah login                   [90m# src/test/resources/features/DaftarProduk.feature:3[0m
+  [32mGiven [0m[32mPretest verifikasi, login dengan user valid[0m                            [90m# com.juaracoding.apitest.steps.VerifikasiProdukTest.testStep01()[0m
+  [32mWhen [0m[32mVerifikasi semua produk ditampilkan[0m                                     [90m# com.juaracoding.apitest.steps.VerifikasiProdukTest.testStep02()[0m
+  [32mThen [0m[32mDaftar produk muncul lengkap dengan nama, harga, dan tombol Add to Cart[0m [90m# com.juaracoding.apitest.steps.VerifikasiProdukTest.testStep03()[0m
+
+Scenario: TC004 - Tambah produk ke keranjang         [90m# src/test/resources/features/DaftarProduk.feature:15[0m
+  [31mWhen [0m[31mPengguna menambahkan satu produk ke keranjang[0m [90m# com.juaracoding.apitest.steps.CartStep.tambah_produk()[0m
+      [31mjava.lang.IndexOutOfBoundsException: Index 0 out of bounds for length 0
+      	at java.base/jdk.internal.util.Preconditions.outOfBounds(Preconditions.java:64)
+      	at java.base/jdk.internal.util.Preconditions.outOfBoundsCheckIndex(Preconditions.java:70)
+      	at java.base/jdk.internal.util.Preconditions.checkIndex(Preconditions.java:266)
+      	at java.base/java.util.Objects.checkIndex(Objects.java:359)
+      	at java.base/java.util.ArrayList.get(ArrayList.java:427)
+      	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+      	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+      	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+      	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+      	at org.openqa.selenium.support.pagefactory.internal.LocatingElementListHandler.invoke(LocatingElementListHandler.java:39)
+      	at jdk.proxy2/jdk.proxy2.$Proxy25.get(Unknown Source)
+      	at com.juaracoding.apitest.pages.ProdukListPage.clickAddToCartFirstItem(ProdukListPage.java:41)
+      	at com.juaracoding.apitest.steps.CartStep.tambah_produk(CartStep.java:32)
+      	at ✽.Pengguna menambahkan satu produk ke keranjang(file:///F:/SQA/CucumberRestAssuredEcommerce/src/test/resources/features/DaftarProduk.feature:9)[0m
+  [36mAnd [0m[36mPengguna membuka halaman keranjang[0m             [90m# com.juaracoding.apitest.steps.CartStep.buka_keranjang()[0m
+  [36mThen [0m[36mProduk ditampilkan di halaman keranjang[0m       [90m# com.juaracoding.apitest.steps.CartStep.verifikasi_produk_keranjang()[0m
+
+Scenario: TC005 - Isi informasi checkout               [90m# src/test/resources/features/DaftarProduk.feature:17[0m
+  [31mGiven [0m[31mPengguna berada di halaman keranjang[0m           [90m# com.juaracoding.apitest.steps.CheckoutPage.berada_di_keranjang()[0m
+      [31mjava.lang.AssertionError: expected [true] but found [false]
+      	at org.testng.Assert.fail(Assert.java:111)
+      	at org.testng.Assert.failNotEquals(Assert.java:1578)
+      	at org.testng.Assert.assertTrue(Assert.java:57)
+      	at org.testng.Assert.assertTrue(Assert.java:67)
+      	at com.juaracoding.apitest.steps.CheckoutPage.berada_di_keranjang(CheckoutPage.java:20)
+      	at ✽.Pengguna berada di halaman keranjang(file:///F:/SQA/CucumberRestAssuredEcommerce/src/test/resources/features/DaftarProduk.feature:18)[0m
+  [36mWhen [0m[36mPengguna mengklik tombol Checkout[0m               [90m# com.juaracoding.apitest.steps.CheckoutPage.klik_checkout()[0m
+  [36mAnd [0m[36mPengguna mengisi data [0m[36m[1m"Abdi"[0m[36m, [0m[36m[1m"Lah"[0m[36m, dan [0m[36m[1m"12345"[0m [90m# com.juaracoding.apitest.steps.CheckoutPage.isi_form(java.lang.String,java.lang.String,java.lang.String)[0m
+  [36mAnd [0m[36mPengguna mengklik tombol Continue[0m                [90m# com.juaracoding.apitest.steps.CheckoutPage.klik_continue()[0m
+  [36mThen [0m[36mHalaman ringkasan checkout ditampilkan[0m          [90m# com.juaracoding.apitest.steps.CheckoutPage.halaman_ringkasan()[0m
+
+Scenario: TC006 - Selesaikan proses checkout          [90m# src/test/resources/features/DaftarProduk.feature:24[0m
+  [31mGiven [0m[31mPengguna berada di halaman ringkasan checkout[0m [90m# com.juaracoding.apitest.steps.OverviewPage.di_ringkasan()[0m
+      [31mjava.lang.AssertionError: expected [true] but found [false]
+      	at org.testng.Assert.fail(Assert.java:111)
+      	at org.testng.Assert.failNotEquals(Assert.java:1578)
+      	at org.testng.Assert.assertTrue(Assert.java:57)
+      	at org.testng.Assert.assertTrue(Assert.java:67)
+      	at com.juaracoding.apitest.steps.OverviewPage.di_ringkasan(OverviewPage.java:23)
+      	at ✽.Pengguna berada di halaman ringkasan checkout(file:///F:/SQA/CucumberRestAssuredEcommerce/src/test/resources/features/DaftarProduk.feature:25)[0m
+  [36mWhen [0m[36mPengguna mengklik tombol Finish[0m                [90m# com.juaracoding.apitest.steps.OverviewPage.klik_finish()[0m
+  [36mThen [0m[36mPesan [0m[36m[1m"THANK YOU FOR YOUR ORDER"[0m[36m ditampilkan[0m   [90m# com.juaracoding.apitest.steps.OverviewPage.verifikasi_pesan(java.lang.String)[0m
+
+Scenario: TC007 - Logout dari sistem                         [90m# src/test/resources/features/DaftarProduk.feature:29[0m
+  [31mWhen [0m[31mPengguna klik menu dan memilih logout[0m                 [90m# com.juaracoding.apitest.steps.LogoutStep.pengguna_logout()[0m
+      [31morg.openqa.selenium.NoSuchElementException: no such element: Unable to locate element: {"method":"css selector","selector":"#react\-burger\-menu\-btn"}
+        (Session info: MicrosoftEdge=137.0.3296.68)
+      For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#no-such-element-exception
+      Build info: version: '4.26.0', revision: '8ccf0219d7'
+      System info: os.name: 'Windows 11', os.arch: 'amd64', os.version: '10.0', java.version: '17.0.12'
+      Driver info: org.openqa.selenium.edge.EdgeDriver
+      Command: [f53a49c135071d517fa3ec06953b60a5, findElement {value=react-burger-menu-btn, using=id}]
+      Capabilities {acceptInsecureCerts: false, browserName: MicrosoftEdge, browserVersion: 137.0.3296.68, fedcm:accounts: true, ms:edgeOptions: {debuggerAddress: localhost:56518}, msedge: {msedgedriverVersion: 137.0.3296.83 (24e00e9cccf2..., userDataDir: C:\Users\VazeX\AppData\Loca...}, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: windows, proxy: Proxy(), se:cdp: ws://localhost:56518/devtoo..., se:cdpVersion: 137.0.3296.68, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+      Session ID: f53a49c135071d517fa3ec06953b60a5
+      	at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+      	at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:77)
+      	at java.base/jdk.internal.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
+      	at java.base/java.lang.reflect.Constructor.newInstanceWithCaller(Constructor.java:499)
+      	at java.base/java.lang.reflect.Constructor.newInstance(Constructor.java:480)
+      	at org.openqa.selenium.remote.ErrorCodec.decode(ErrorCodec.java:167)
+      	at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:138)
+      	at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:50)
+      	at org.openqa.selenium.remote.HttpCommandExecutor.execute(HttpCommandExecutor.java:190)
+      	at org.openqa.selenium.remote.service.DriverCommandExecutor.invokeExecute(DriverCommandExecutor.java:216)
+      	at org.openqa.selenium.remote.service.DriverCommandExecutor.execute(DriverCommandExecutor.java:174)
+      	at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:545)
+      	at org.openqa.selenium.remote.ElementLocation$ElementFinder$2.findElement(ElementLocation.java:165)
+      	at org.openqa.selenium.remote.ElementLocation.findElement(ElementLocation.java:59)
+      	at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:368)
+      	at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:362)
+      	at com.juaracoding.apitest.steps.LogoutStep.pengguna_logout(LogoutStep.java:24)
+      	at ✽.Pengguna klik menu dan memilih logout(file:///F:/SQA/CucumberRestAssuredEcommerce/src/test/resources/features/DaftarProduk.feature:30)[0m
+  [36mThen [0m[36mPengguna berhasil logout dan kembali ke halaman login[0m [90m# com.juaracoding.apitest.steps.LogoutStep.validasi_halaman_login()[0m
